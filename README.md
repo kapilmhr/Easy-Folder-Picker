@@ -1,4 +1,4 @@
-# easy_folder_picker
+# Easy Folder Picker
 
 Easy directory picker for Flutter  
 
