@@ -6,9 +6,12 @@ Easy directory picker for Flutter
 
 A flutter package to pick directories and handles requesting required permissions as well. This package only supports android.
 
-![Picker Screenshot](screenshots/roots.png)
-![Picker Screenshot](screenshots/innerfolder.png)
-
+<div>
+  <img src="screenshots/roots.png" width="240" hspace="20" />
+  <br/>
+<div>
+  <img src="screenshots/innerfolder.png" width="240" hspace="20" />
+  <br/>
 ## Installation
 
 Add below line to your `pubspec.yaml` and run `flutter packages get`
@@ -49,18 +52,24 @@ If you want to allow creating new folders directly from picker then add the belo
 
 ## Usage
 ```
-import 'package:directory_picker/directory_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:easy_folder_picker/FolderPicker.dart';
 
 // In any callback call the below method
-Directory newaDirectory = await DirectoryPicker.pick(
-  context: context,
-  rootDirectory: directory
-);
+  Future<void> _pickDirectory(BuildContext context) async {
+    Directory directory = selectedDirectory;
+    if (directory == null) {
+      directory = Directory(FolderPicker.ROOTPATH);
+    }
 
-if (newDirectory != null) {
-  // Do something with the picked directory
-} else {
-  // User cancelled without picking any directory
-}
+    Directory newDirectory = await FolderPicker.pick(
+        allowFolderCreation: true,
+        context: context,
+        rootDirectory: directory,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))));
+    setState(() {
+      selectedDirectory = newDirectory;
+      print(selectedDirectory);
+    });
+  }
 ```
