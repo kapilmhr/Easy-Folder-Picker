@@ -6,15 +6,15 @@ Easy directory picker for Flutter
 
 A flutter package to pick directories and handles requesting required permissions as well. This package only supports android.
 
-  <img src="screenshots/roots.png" width="240" hspace="20" />
-  <img src="screenshots/innerfolder.png" width="240" hspace="20" />
+![Picker Screenshot](screenshots/roots.png)
+![Picker Screenshot](screenshots/innerfolder.png)
 
 
 ## Installation
 
 Add below line to your `pubspec.yaml` and run `flutter packages get`
 ```
-  easy_folder_picker: ^0.0.1
+  easy_folder_picker: ^0.0.3
 ```
 
 ## Permissions
