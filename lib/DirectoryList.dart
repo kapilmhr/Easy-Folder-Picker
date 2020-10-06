@@ -68,7 +68,7 @@ class _DirectoryListState extends State<DirectoryList> {
             children: [_buildBackNav(context)]
               ..addAll(directoryList.map((directory) {
                 return ListTile(
-                  leading: Icon(Icons.folder, color: theme.primaryColor),
+                  leading: Icon(Icons.folder, color: theme.accentColor),
                   title: Text(_getDirectoryName(directory)),
                   onTap: () => _setDirectory(directory),
                 );
