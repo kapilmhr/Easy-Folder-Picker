@@ -72,7 +72,7 @@ class DirectoryPickerData extends InheritedWidget {
       : super(child: child);
 
   static DirectoryPickerData of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(DirectoryPickerData);
+    return context.dependOnInheritedWidgetOfExactType(aspect: DirectoryPickerData);
   }
 
   @override
@@ -132,7 +132,7 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   Future<void> _requestPermission() async {
     if (true) {
       status = await Permission.storage.status;
-      if (status.isUndetermined) {
+      if (status.isRestricted) {
         // We didn't ask for permission
         status = await Permission.storage.request();
       }
