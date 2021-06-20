@@ -19,9 +19,9 @@ class DirectoryList extends StatefulWidget {
 class _DirectoryListState extends State<DirectoryList> {
   static final double spacing = 8;
 
-  Directory rootDirectory;
-  Directory currentDirectory;
-  List<Directory> directoryList;
+  Directory? rootDirectory;
+  Directory? currentDirectory;
+  List<Directory?>? directoryList;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _DirectoryListState extends State<DirectoryList> {
     return ListTile(
       leading: Icon(Icons.folder, color: theme.primaryColor),
       title: Text('..'),
-      onTap: () => _setDirectory(currentDirectory.parent),
+      onTap: () => _setDirectory(currentDirectory!.parent),
     );
   }
 
@@ -52,7 +52,7 @@ class _DirectoryListState extends State<DirectoryList> {
           ),
         )
       ];
-    } else if (directoryList.length == 0) {
+    } else if (directoryList!.length == 0) {
       return [
         _buildBackNav(context),
         Expanded(
@@ -66,10 +66,10 @@ class _DirectoryListState extends State<DirectoryList> {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [_buildBackNav(context)]
-              ..addAll(directoryList.map((directory) {
+              ..addAll(directoryList!.map((directory) {
                 return ListTile(
                   leading: Icon(Icons.folder, color: theme.accentColor),
-                  title: Text(_getDirectoryName(directory)),
+                  title: Text(_getDirectoryName(directory!)),
                   onTap: () => _setDirectory(directory),
                 );
               })),
@@ -98,7 +98,7 @@ class _DirectoryListState extends State<DirectoryList> {
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
           ),
-          data.allowFolderCreation
+          data!.allowFolderCreation!
               ? Padding(
                   child: IconButton(
                       color: theme.primaryColor,
@@ -142,7 +142,7 @@ class _DirectoryListState extends State<DirectoryList> {
   }
 
   Future<void> _init() async {
-    rootDirectory = data.rootDirectory;
+    rootDirectory = data!.rootDirectory;
     _setDirectory(rootDirectory);
   }
 
@@ -156,19 +156,19 @@ class _DirectoryListState extends State<DirectoryList> {
     }
   }
 
-  Future<void> _setDirectory(Directory directory) async {
+  Future<void> _setDirectory(Directory? directory) async {
     setState(() {
       try {
-        directoryList = directory
+        directoryList = directory!
             .listSync()
-            .map<Directory>((fse) => (fse is Directory ? fse : null))
+            .map<Directory?>((fse) => (fse is Directory ? fse : null))
             .toList()
               ..removeWhere((fse) => fse == null);
         currentDirectory = directory;
       } catch (e) {
         // Ignore when tried navigating to directory that does not exist
         // or to which user does not have permission to read
-        print(e ?? 'Failed to read: ${directory.path}');
+        print(e ?? 'Failed to read: ${directory!.path}');
       }
     });
   }
@@ -177,12 +177,12 @@ class _DirectoryListState extends State<DirectoryList> {
     return directory.path.split('/').last;
   }
 
-  DirectoryPickerData get data => DirectoryPickerData.of(context);
+  DirectoryPickerData? get data => DirectoryPickerData.of(context);
 }
 
 class _NewFolderDialog extends StatefulWidget {
-  final DirectoryPickerData data;
-  final Directory parent;
+  final DirectoryPickerData? data;
+  final Directory? parent;
 
   _NewFolderDialog({this.data, this.parent});
 
@@ -191,9 +191,9 @@ class _NewFolderDialog extends StatefulWidget {
 }
 
 class _NewFolderDialogState extends State<_NewFolderDialog> {
-  String name;
+  String? name;
   bool isSubmitting = false;
-  String errorMessage;
+  String? errorMessage;
 
   @override
   void initState() {
@@ -201,7 +201,7 @@ class _NewFolderDialogState extends State<_NewFolderDialog> {
   }
 
   Future<void> _createDirectory() async {
-    if (name == null || name.trim() == '') {
+    if (name == null || name!.trim() == '') {
       setState(() => errorMessage = 'Enter a valid folder name');
       return;
     }
@@ -209,7 +209,7 @@ class _NewFolderDialogState extends State<_NewFolderDialog> {
     try {
       setState(() => isSubmitting = true);
       Directory newDirectory =
-          await Directory(path.join(widget.parent.path, name)).create();
+          await Directory(path.join(widget.parent!.path, name)).create();
       Navigator.pop(context, newDirectory);
     } catch (e) {
       setState(() => errorMessage = 'Failed to create folder');
@@ -227,22 +227,22 @@ class _NewFolderDialogState extends State<_NewFolderDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: widget.data.backgroundColor,
+      backgroundColor: widget.data!.backgroundColor,
       content: TextField(
         autofocus: true,
         decoration: InputDecoration(errorText: errorMessage),
         onChanged: _onNameChanged,
       ),
       actions: <Widget>[
-        FlatButton(
+        MaterialButton(
             child: Text('Cancel'),
             onPressed: isSubmitting ? null : () => Navigator.pop(context)),
-        FlatButton(
+        MaterialButton(
           child: Text('Create Folder'),
           onPressed: isSubmitting ? null : _createDirectory,
         )
       ],
-      shape: widget.data.shape,
+      shape: widget.data!.shape,
       title: Text('Create New Folder'),
     );
   }

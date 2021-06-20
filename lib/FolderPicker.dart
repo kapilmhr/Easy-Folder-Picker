@@ -22,18 +22,18 @@ class FolderPicker {
   /// If [allowFolderCreation] is true then user will be allowed to create
   /// new folders directly from the picker. Make sure that you add write
   /// permission to manifest if you want to support folder creationa
-  static Future<Directory> pick(
+  static Future<Directory?> pick(
       {bool allowFolderCreation = false,
-      @required BuildContext context,
+      required BuildContext context,
       bool barrierDismissible = true,
-      Color backgroundColor,
-      @required Directory rootDirectory,
-      String message,
-      ShapeBorder shape}) async {
+      Color? backgroundColor,
+      required Directory rootDirectory,
+      String? message,
+      ShapeBorder? shape}) async {
     assert(context != null, 'A non null context is required');
 
     if (Platform.isAndroid) {
-      Directory directory = await showDialog<Directory>(
+      Directory? directory = await showDialog<Directory>(
           context: context,
           barrierDismissible: barrierDismissible,
           builder: (BuildContext context) {
@@ -56,14 +56,14 @@ class FolderPicker {
 }
 
 class DirectoryPickerData extends InheritedWidget {
-  final bool allowFolderCreation;
-  final Color backgroundColor;
-  final String message;
-  final Directory rootDirectory;
-  final ShapeBorder shape;
+  final bool? allowFolderCreation;
+  final Color? backgroundColor;
+  final String? message;
+  final Directory? rootDirectory;
+  final ShapeBorder? shape;
 
   DirectoryPickerData(
-      {Widget child,
+      {required Widget child,
       this.allowFolderCreation,
       this.backgroundColor,
       this.message,
@@ -71,7 +71,7 @@ class DirectoryPickerData extends InheritedWidget {
       this.shape})
       : super(child: child);
 
-  static DirectoryPickerData of(BuildContext context) {
+  static DirectoryPickerData? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType(aspect: DirectoryPickerData);
   }
 
@@ -94,13 +94,13 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
 
   bool canPrompt = true;
   bool checkingForPermission = false;
-  PermissionStatus status;
+  PermissionStatus? status;
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     Future.delayed(Duration.zero).then((_) => _requestPermission());
   }
 
@@ -113,7 +113,7 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
 
     super.dispose();
   }
@@ -132,16 +132,16 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   Future<void> _requestPermission() async {
     if (true) {
       status = await Permission.storage.status;
-      if (status.isRestricted) {
+      if (status!.isRestricted) {
         // We didn't ask for permission
         status = await Permission.storage.request();
       }
 
-      if (status.isDenied) {
+      if (status!.isDenied) {
         status = await Permission.storage.request();
       }
 
-      if (status.isPermanentlyDenied) {
+      if (status!.isPermanentlyDenied) {
         Scaffold.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
           content: Text('Please setup Permission from App Permission Settings'),
@@ -150,20 +150,20 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
     }
   }
 
-  DirectoryPickerData get data => DirectoryPickerData.of(context);
+  DirectoryPickerData? get data => DirectoryPickerData.of(context);
 
-  String get message {
-    if (data.message == null) {
+  String? get message {
+    if (data!.message == null) {
       return 'Please setup Permission from App Permission Settings\n\nApp needs read access to your device storage to load directories';
     } else {
-      return data.message;
+      return data!.message;
     }
   }
 
   Widget _buildBody(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    print("status $status");
+    // print("status $status");
     if (status == null) {
       return Padding(
           padding: EdgeInsets.all(spacing * 2),
@@ -193,9 +193,9 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
           padding: EdgeInsets.all(spacing * 2),
           child: Column(
             children: <Widget>[
-              Text(message, textAlign: TextAlign.center),
+              Text(message!, textAlign: TextAlign.center),
               SizedBox(height: spacing),
-              RaisedButton(
+              MaterialButton(
                   child: Text('Grant Permission'),
                   color: theme.primaryColor,
                   onPressed: _requestPermission)
@@ -210,9 +210,9 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   Widget build(BuildContext context) {
     _getPermissionStatus();
     return Dialog(
-      backgroundColor: data.backgroundColor,
+      backgroundColor: data!.backgroundColor,
       child: _buildBody(context),
-      shape: data.shape,
+      shape: data!.shape,
     );
   }
 }

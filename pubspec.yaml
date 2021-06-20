@@ -5,12 +5,12 @@ author: kapil<kapilmhr016@gmail.com>
 homepage: https://github.com/kapilmhr/Easy-Folder-Picker
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  permission_handler: ^6.1.0
+  permission_handler: ^8.1.1
   path: ^1.8.0
 
 dev_dependencies:

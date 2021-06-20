@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Easy Folder Picker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -28,15 +28,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Directory selectedDirectory;
+  Directory? selectedDirectory;
 
   Future<void> _pickDirectory(BuildContext context) async {
-    Directory directory = selectedDirectory;
+    Directory? directory = selectedDirectory;
     if (directory == null) {
       directory = Directory(FolderPicker.ROOTPATH);
     }
 
-    Directory newDirectory = await FolderPicker.pick(
+    Directory? newDirectory = await FolderPicker.pick(
         allowFolderCreation: true,
         context: context,
         rootDirectory: directory,
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               _pickDirectory(context);
             },
           ),
-          selectedDirectory!=null ? Text("Selected Path : ${selectedDirectory.path}"):Container(),
+          selectedDirectory!=null ? Text("Selected Path : ${selectedDirectory!.path}"):Container(),
         ],),
       ),
     );

@@ -14,7 +14,7 @@ A flutter package to pick directories and handles requesting required permission
 
 Add below line to your `pubspec.yaml` and run `flutter packages get`
 ```
-  easy_folder_picker: ^0.0.3
+  easy_folder_picker: ^latest version
 ```
 
 ## Permissions
@@ -26,7 +26,12 @@ If you want to allow creating new folders directly from picker then add the belo
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
+In Android Q, you need to add the Following Lines in AndroidManifest file:
+```
+<application
+      android:requestLegacyExternalStorage="true"
 
+```
 ## Usage
 ```
 import 'package:easy_folder_picker/FolderPicker.dart';
