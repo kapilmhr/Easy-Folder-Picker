@@ -72,7 +72,8 @@ class DirectoryPickerData extends InheritedWidget {
       : super(child: child);
 
   static DirectoryPickerData? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType(aspect: DirectoryPickerData);
+    return context.dependOnInheritedWidgetOfExactType(
+        aspect: DirectoryPickerData);
   }
 
   @override

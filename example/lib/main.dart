@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:easy_folder_picker/FolderPicker.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -56,18 +57,20 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: Container(
-        child:Column(children: [
-          IconButton(
-            icon: Icon(Icons.file_download),
-            onPressed: () {
-              _pickDirectory(context);
-            },
-          ),
-          selectedDirectory!=null ? Text("Selected Path : ${selectedDirectory!.path}"):Container(),
-        ],),
+        child: Column(
+          children: [
+            IconButton(
+              icon: Icon(Icons.file_download),
+              onPressed: () {
+                _pickDirectory(context);
+              },
+            ),
+            selectedDirectory != null
+                ? Text("Selected Path : ${selectedDirectory!.path}")
+                : Container(),
+          ],
+        ),
       ),
     );
   }
 }
-
-
