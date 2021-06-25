@@ -12,3 +12,7 @@
 * Migrated to Null-Safety.
 * Upgraded the dependecies used in the project.
 * Removed the deprecated widgets.
+
+## [1.1.1] - 2021-06-25
+ 
+* Removed non nulll warnings
