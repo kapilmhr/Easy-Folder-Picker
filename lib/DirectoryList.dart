@@ -93,7 +93,7 @@ class _DirectoryListState extends State<DirectoryList> {
               children: [
                 Text('Selected directory', style: theme.textTheme.subtitle2),
                 SizedBox(height: spacing / 2),
-                Text(path ?? '', style: theme.textTheme.caption)
+                Text(path, style: theme.textTheme.caption)
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
@@ -168,7 +168,7 @@ class _DirectoryListState extends State<DirectoryList> {
       } catch (e) {
         // Ignore when tried navigating to directory that does not exist
         // or to which user does not have permission to read
-        print(e ?? 'Failed to read: ${directory!.path}');
+        print(e);
       }
     });
   }
