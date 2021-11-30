@@ -1,6 +1,6 @@
 name: easy_folder_picker
 description: Easy directory picker for Flutter, you can choose directory or create directory for further action
-version: 1.1.0
+version: 1.1.1
 #author: kapil<kapilmhr016@gmail.com>
 homepage: https://github.com/kapilmhr/Easy-Folder-Picker
 
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  permission_handler: ^8.1.1
+  permission_handler: ^8.3.0
   path: ^1.8.0
 
 dev_dependencies:
