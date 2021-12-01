@@ -143,7 +143,7 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
       }
 
       if (status!.isPermanentlyDenied) {
-        Scaffold.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
           content: Text('Please setup Permission from App Permission Settings'),
         ));

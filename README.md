@@ -27,28 +27,31 @@ If you want to allow creating new folders directly from picker then add the belo
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-#### Android 10 (Q)
+### Android 10 (Q)
 In Android 10, you need to add the Following Lines in AndroidManifest file:
 ```
 <application
       android:requestLegacyExternalStorage="true"
 ```
-#### Android 11
+### Android 11
 From Android 11, you need to manage permission within your app, if you want to write in different folders of **external storage**.
-- Add the following Lines in AndroidManifest file
+
+#### Steps
+1. Add the following Lines in AndroidManifest file
 ```
   <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 ```
-- Add [device_info](https://pub.dev/packages/device_info) package to check android version
-- Check permission if app can **manage external storage** if its android 11 or greater
+2. Add [device_info](https://pub.dev/packages/device_info) package to check android version
+3. Check permission if app can **manage external storage** if its android 11 or greater
+   **Note**: This is a runtime permission (might not show it in app info's permission section )
 ```
-  var status = await Permission.storage.status;
+  var status = await Permission.manageExternalStorage.status;
       if (status!.isRestricted) {
-        status = await Permission.storage.request();
+        status = await Permission.manageExternalStorage.request();
       }
 
       if (status!.isDenied) {
-        status = await Permission.storage.request();
+        status = await Permission.manageExternalStorage.request();
       }
       if (status!.isPermanentlyDenied) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
