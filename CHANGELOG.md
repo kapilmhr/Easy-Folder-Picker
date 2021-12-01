@@ -15,4 +15,9 @@
 
 ## [1.1.1] - 2021-06-25
  
-* Removed non nulll warnings
+* Removed non null warnings
+
+## [1.2.1] - 2021-12-01
+ 
+* Added instructions for android 11
+* Upgraded the dependecies used in the project.
