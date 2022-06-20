@@ -82,7 +82,7 @@ class _DirectoryListState extends State<DirectoryList> {
   Widget _buildHeader(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     var path = (currentDirectory != null)
-        ? currentDirectory?.path.replaceAll(FolderPicker.ROOTPATH, "") ?? ''
+        ? currentDirectory?.path.replaceAll(FolderPicker.rootPath, "") ?? ''
         : "";
 
     return Container(

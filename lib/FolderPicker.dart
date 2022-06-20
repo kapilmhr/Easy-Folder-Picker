@@ -51,7 +51,7 @@ class FolderPicker {
     }
   }
 
-  static String ROOTPATH = "/storage/emulated/0/";
+  static String rootPath = "/storage/emulated/0/";
 }
 
 class DirectoryPickerData extends InheritedWidget {

@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _pickDirectory(BuildContext context) async {
     Directory? directory = selectedDirectory;
     if (directory == null) {
-      directory = Directory(FolderPicker.ROOTPATH);
+      directory = Directory(FolderPicker.rootPath);
     }
 
     Directory? newDirectory = await FolderPicker.pick(
