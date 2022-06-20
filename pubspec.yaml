@@ -5,12 +5,12 @@ version: 1.2.1
 homepage: https://github.com/kapilmhr/Easy-Folder-Picker
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.17.3 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  permission_handler: ^8.3.0
+  permission_handler: ^10.0.0
   path: ^1.8.0
 
 dev_dependencies:
