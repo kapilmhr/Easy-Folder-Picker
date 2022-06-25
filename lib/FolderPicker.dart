@@ -30,7 +30,6 @@ class FolderPicker {
       required Directory rootDirectory,
       String? message,
       ShapeBorder? shape}) async {
-    assert(context != null, 'A non null context is required');
 
     if (Platform.isAndroid) {
       Directory? directory = await showDialog<Directory>(
@@ -52,7 +51,7 @@ class FolderPicker {
     }
   }
 
-  static String ROOTPATH = "/storage/emulated/0/";
+  static String rootPath = "/storage/emulated/0/";
 }
 
 class DirectoryPickerData extends InheritedWidget {
@@ -101,7 +100,7 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     Future.delayed(Duration.zero).then((_) => _requestPermission());
   }
 
@@ -114,7 +113,7 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
   }

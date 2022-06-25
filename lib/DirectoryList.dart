@@ -68,7 +68,7 @@ class _DirectoryListState extends State<DirectoryList> {
             children: [_buildBackNav(context)]
               ..addAll(directoryList!.map((directory) {
                 return ListTile(
-                  leading: Icon(Icons.folder, color: theme.accentColor),
+                  leading: Icon(Icons.folder, color: theme.colorScheme.secondary),
                   title: Text(_getDirectoryName(directory!)),
                   onTap: () => _setDirectory(directory),
                 );
@@ -82,7 +82,7 @@ class _DirectoryListState extends State<DirectoryList> {
   Widget _buildHeader(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     var path = (currentDirectory != null)
-        ? currentDirectory?.path.replaceAll(FolderPicker.ROOTPATH, "") ?? ''
+        ? currentDirectory?.path.replaceAll(FolderPicker.rootPath, "") ?? ''
         : "";
 
     return Container(
