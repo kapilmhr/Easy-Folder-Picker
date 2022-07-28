@@ -1,6 +1,6 @@
 # Easy Folder Picker
 
-Easy directory picker for Flutter  
+Easy directory picker for Flutter
 
 [![pub](https://img.shields.io/pub/v/easy_folder_picker.svg)](https://pub.dev/packages/easy_folder_picker)
 
@@ -27,13 +27,40 @@ If you want to allow creating new folders directly from picker then add the belo
 ```
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
-In Android Q, you need to add the Following Lines in AndroidManifest file:
+### Android 10 (Q)
+In Android 10, you need to add the Following Lines in AndroidManifest file:
 ```
 <application
       android:requestLegacyExternalStorage="true"
-
 ```
-## Usage
+### Android 11
+From Android 11, you need to manage permission within your app, if you want to write in different folders of **external storage**.
+
+#### Steps
+1. Add the following Lines in AndroidManifest file
+```
+  <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+```
+2. Add [device_info](https://pub.dev/packages/device_info) package to check android version
+3. Check permission if app can **manage external storage** if its android 11 or greater
+   **Note**: This is a runtime permission (might not show it in app info's permission section )
+```
+  var status = await Permission.manageExternalStorage.status;
+      if (status!.isRestricted) {
+        status = await Permission.manageExternalStorage.request();
+      }
+
+      if (status!.isDenied) {
+        status = await Permission.manageExternalStorage.request();
+      }
+      if (status!.isPermanentlyDenied) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Please add permission for app to manage external storage'),
+        ));
+      }
+```
+# Flutter Usage
 ```
 import 'package:easy_folder_picker/FolderPicker.dart';
 
