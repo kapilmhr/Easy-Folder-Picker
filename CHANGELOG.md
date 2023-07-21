@@ -20,4 +20,9 @@
 ## [1.2.1] - 2021-12-01
  
 * Added instructions for android 11
-* Upgraded the dependecies used in the project.
+* Upgraded the dependencies used in the project.
+
+
+* ## [1.2.2] - 2021-12-01
+ 
+* Upgraded the dependencies used in the project.
