@@ -23,6 +23,6 @@
 * Upgraded the dependencies used in the project.
 
 
-* ## [1.2.2] - 2021-12-01
+* ## [1.2.2] - 2023-07-21
  
 * Upgraded the dependencies used in the project.
