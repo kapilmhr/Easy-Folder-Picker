@@ -10,7 +10,7 @@
 ## [1.1.0] - 2021-06-20
  
 * Migrated to Null-Safety.
-* Upgraded the dependecies used in the project.
+* Upgraded the dependencies used in the project.
 * Removed the deprecated widgets.
 
 ## [1.1.1] - 2021-06-25
@@ -22,7 +22,13 @@
 * Added instructions for android 11
 * Upgraded the dependencies used in the project.
 
+## [1.3.0] - 2022-07-28
 
-* ## [1.2.2] - 2023-07-21
- 
+* Upgraded the dependencies used in the project.
+* Dart version upgraded
+* Build with flutter 3
+* Tested with Android 12
+
+* ## [1.3.1] - 2023-07-21
+
 * Upgraded the dependencies used in the project.
