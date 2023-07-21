@@ -30,7 +30,6 @@ class FolderPicker {
       required Directory rootDirectory,
       String? message,
       ShapeBorder? shape}) async {
-
     if (Platform.isAndroid) {
       Directory? directory = await showDialog<Directory>(
           context: context,
@@ -121,8 +120,9 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   /// If silent is true then below function will not try to request permission
   /// if permission is not granter
   Future<void> _getPermissionStatus() async {
-    var updatedStatus = await Permission.storage.status;
-    final updatedCanPrompt = await Permission.storage.isGranted;
+    var updatedStatus = await Permission.manageExternalStorage.status;
+    final updatedCanPrompt = await Permission.manageExternalStorage.isGranted;
+
     setState(() {
       canPrompt = updatedCanPrompt;
       status = updatedStatus;
@@ -130,15 +130,16 @@ class _DirectoryPickerDialogState extends State<_DirectoryPickerDialog>
   }
 
   Future<void> _requestPermission() async {
-    if (true) {
-      status = await Permission.storage.status;
+    if (canPrompt) {
+      status = await Permission.manageExternalStorage.status;
+      print(status);
       if (status!.isRestricted) {
         // We didn't ask for permission
-        status = await Permission.storage.request();
+        status = await Permission.manageExternalStorage.request();
       }
 
       if (status!.isDenied) {
-        status = await Permission.storage.request();
+        status = await Permission.manageExternalStorage.request();
       }
 
       if (status!.isPermanentlyDenied) {

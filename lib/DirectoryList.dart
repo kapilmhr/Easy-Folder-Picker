@@ -91,9 +91,9 @@ class _DirectoryListState extends State<DirectoryList> {
           Expanded(
             child: Column(
               children: [
-                Text('Selected directory', style: theme.textTheme.subtitle2),
+                Text('Selected directory', style: theme.textTheme.labelMedium),
                 SizedBox(height: spacing / 2),
-                Text(path, style: theme.textTheme.caption)
+                Text(path, style: theme.textTheme.labelSmall)
               ],
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
