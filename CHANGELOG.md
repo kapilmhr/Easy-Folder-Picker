@@ -32,3 +32,7 @@
 * ## [1.3.1] - 2023-07-21
 
 * Upgraded the dependencies used in the project.
+
+* ## [1.3.2] - 2024-02-15
+
+* Upgraded the dependencies used in the project.
