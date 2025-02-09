@@ -41,3 +41,8 @@
 
 * Upgraded the dependencies used in the project.
 * Readme updated.
+
+* ## [1.3.4] - 2025-02-09
+
+* Upgraded the dependencies used in the project.
+* Readme updated.
